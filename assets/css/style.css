@@ -494,6 +494,85 @@ main {
 .navbar-link.active { color: var(--orange-yellow-crayola); }
 
 
+.experience {
+  margin-bottom: 35px;
+}
+
+.experience .section-title {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: var(--fs-1);
+  font-family: var(--ff-poppins);
+  color: var(--white-1);
+}
+
+.experience-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 600px) {
+  .experience-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .experience-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-box {
+  position: relative;
+  background: var(--border-gradient-onyx);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-2);
+  z-index: 1;
+  text-align: center;
+}
+
+.stat-box::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: var(--fw-600);
+  color: var(--orange-yellow-crayola);
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  font-size: var(--fs-6);
+  color: var(--light-gray);
+  font-weight: var(--fw-3);
+}
+
+
+.centered-cta {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  text-align: start;
+}
+
+
+
+
+
+
+.form-btn:hover {
+  background: var(--vegas-gold);
+  transform: translateY(-2px);
+}
 
 
 
@@ -586,6 +665,64 @@ padding-top: 10px;
   padding-top: 10px;
   text-align: center;
 }
+
+
+
+/**
+ * #teem
+ */
+
+
+
+
+.team-title {
+  margin-bottom: 20px;
+}
+
+.team-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.team-member {
+  background: var(--border-gradient-onyx);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-2);
+  position: relative;
+  z-index: 1;
+}
+
+.team-member::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.team-img-box {
+  margin-bottom: 10px;
+}
+
+.team-img-box img {
+  border-radius: 50%;
+  border: 2px solid var(--orange-yellow-crayola);
+  box-shadow: var(--shadow-1);
+}
+
+.team-name {
+  margin-bottom: 5px;
+}
+
+.team-role {
+  font-size: var(--fs-6);
+  color: var(--light-gray);
+  font-weight: var(--fw-3);
+}
+
 
 
 /**
@@ -760,29 +897,91 @@ padding-top: 10px;
 
 .clients { margin-bottom: 15px; }
 
-.clients-list {
-  display: flex;
+
+.clients-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.clients-marquee {
+  overflow: hidden;
+  position: relative;
+   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 15px;
   margin: 0 -15px;
   padding: 25px;
   padding-bottom: 25px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: inline mandatory;
-  scroll-padding-inline: 25px;
+
+
+}
+
+.clients-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 30s linear infinite;
 }
 
 .clients-item {
-  min-width: 50%;
-  scroll-snap-align: start;
+  flex: 0 0 auto;
+  margin-right: 40px;
+  min-width: 120px;
 }
 
 .clients-item img {
   width: 100%;
+  height: auto;
+  display: block;
 }
+
+/* Smooth infinite scroll */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Duplicate content using pseudo element */
+.clients-track::after {
+  content: attr(data-duplicate);
+  display: flex;
+}
+
+
+.clients-marquee-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fade shadow using dark background tones and transparency */
+.clients-marquee-wrapper::before,
+.clients-marquee-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.clients-marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--eerie-black-2), transparent);
+  
+}
+
+.clients-marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--eerie-black-2), transparent);
+
+}
+
 
 
 /*-----------------------------------*\
