@@ -157,3 +157,44 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+
+
+
+
+
+
+  function animateCountUp(el, target, duration) {
+    let start = 0;
+    const increment = target / (duration / 16); // Approx 60fps
+    const updateCounter = () => {
+      start += increment;
+      if (start < target) {
+        el.textContent = Math.ceil(start);
+        requestAnimationFrame(updateCounter);
+      } else {
+        el.textContent = target + "+";
+      }
+    };
+    updateCounter();
+  }
+
+  function startCountingWhenVisible() {
+    const counters = document.querySelectorAll('.stat-number');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = +el.getAttribute('data-target');
+          animateCountUp(el, target, 1500);
+          observer.unobserve(el);
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    counters.forEach(counter => observer.observe(counter));
+  }
+
+  document.addEventListener("DOMContentLoaded", startCountingWhenVisible);
